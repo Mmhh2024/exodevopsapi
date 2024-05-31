@@ -1,4 +1,4 @@
-package fr.formation;
+package fr.formation.java;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
