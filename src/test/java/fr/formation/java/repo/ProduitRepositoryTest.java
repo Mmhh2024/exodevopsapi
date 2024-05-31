@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import fr.formation.dao.ProduitRepository;
+import fr.formation.model.Produit;
+
 @DataJpaTest
 public class ProduitRepositoryTest {
 
@@ -36,13 +39,12 @@ public class ProduitRepositoryTest {
 
         produit.setNom(randomName);
         
-        Assertions.assertEquals(null, produit.getId());
-
+        Assertions.assertEquals(0,produit.getId());
         // when
         this.repoProduit.save(produit);
 
         // then
-        Assertions.assertNotEquals(null, produit.getId());
+        Assertions.assertNotEquals(0,produit.getId());
         Assertions.assertEquals(randomName, this.repoProduit.findById(produit.getId()).get().getNom());
     }
 
