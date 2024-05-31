@@ -45,23 +45,7 @@ public class ProduitController {
         return response;
     }
 
-    @GetMapping("/{prix1}/{prix2}/between")
-    public List<ProduitResponse> findByPrixBetween(@PathVariable float prix1, @PathVariable float prix2) {
-       
-        List<Produit> produits = this.repository.findByPrixBetween(prix1, prix2);
-        List<ProduitResponse> response = new ArrayList<>();
-
-        for (Produit produit : produits) {
-            ProduitResponse produitResponse = new ProduitResponse();
-
-            BeanUtils.copyProperties(produit, produitResponse);
-
-            response.add(produitResponse);
-
-        }
-        
-        return response;
-    }
+    
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

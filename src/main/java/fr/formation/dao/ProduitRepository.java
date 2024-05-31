@@ -8,6 +8,5 @@ import fr.formation.model.Produit;
 
 public interface ProduitRepository  extends JpaRepository<Produit, Integer>{
 
-
-    public List<Produit> findByPrixBetween(float start, float end);
+  
 }
