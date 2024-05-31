@@ -1,4 +1,4 @@
-package fr.formation.java.repo;
+package fr.formation.repo;
 
 import java.util.List;
 import java.util.UUID;
@@ -28,7 +28,7 @@ public class ProduitRepositoryTest {
         Assertions.assertNotNull(produits);
         Assertions.assertTrue(produits.size() > 0);
         Assertions.assertEquals(3, produits.size());
-        Assertions.assertEquals("a2", produits.get(1).getId());
+        Assertions.assertEquals("fraises", produits.get(1).getNom());
     }
 
     @Test

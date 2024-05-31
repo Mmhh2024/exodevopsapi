@@ -1,8 +1,10 @@
-package fr.formation.java.api;
+package fr.formation.api;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -11,15 +13,18 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fr.formation.controller.ProduitController;
 import fr.formation.dao.ProduitRepository;
 import fr.formation.model.Produit;
 import fr.formation.request.ProduitRequest;
 
+@WebMvcTest(ProduitController.class)
 public class ProduitControllerTest {
 
+    @Autowired
     private MockMvc mockMvc;
 
-    @InjectMocks
+    @MockBean
     private ProduitRepository repository;
 
     @Test
