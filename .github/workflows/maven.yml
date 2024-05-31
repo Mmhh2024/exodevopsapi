@@ -95,10 +95,10 @@ jobs:
         run: >
           ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}
           "
-          docker stop ci-exodevopsapi-gr2 || true
-          docker rm ci-exodevopsapi-gr2 || true
-          docker run -d -p 8089:8080 --name ci-exodevopsapi-gr2 --pull=always smarieantoine/exodevopsapi-gr2:java
-          exit
+            docker stop ci-exodevopsapi-gr2 || true && 
+            docker rm ci-exodevopsapi-gr2 || true && 
+            docker run -d -p 8089:8080 --name ci-exodevopsapi-gr2 --pull=always smarieantoine/exodevopsapi-gr2:java &&
+            exit
           "
 
       - name: Nettoyage
