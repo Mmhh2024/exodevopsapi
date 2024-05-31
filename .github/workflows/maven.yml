@@ -97,7 +97,6 @@ jobs:
           "
           docker stop ci-exodevopsapi-gr2 || true
           docker rm ci-exodevopsapi-gr2 || true
-          docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN_SERVER }}
           docker run -d -p 8089:8080 --name ci-exodevopsapi-gr2 --pull=always smarieantoine/exodevopsapi-gr2:java
           exit
           "
