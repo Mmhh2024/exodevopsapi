@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,12 +23,15 @@ import fr.formation.response.ProduitResponse;
 @CrossOrigin("*")
 public class ProduitController {
 
-    @Autowired
-    private ProduitRepository repository;
+    private final ProduitRepository produitRepo;
+
+    public ProduitController(ProduitRepository produitRepo) {
+        this.produitRepo = produitRepo;
+    }
 
     @GetMapping
     public List<ProduitResponse> findAll() {
-        List<Produit> produits = this.repository.findAll();
+        List<Produit> produits = this.produitRepo.findAll();
         List<ProduitResponse> response = new ArrayList<>();
 
         for (Produit produit : produits) {
@@ -39,13 +40,9 @@ public class ProduitController {
             BeanUtils.copyProperties(produit, produitResponse);
 
             response.add(produitResponse);
-
         }
-        
         return response;
     }
-
-    
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -54,7 +51,7 @@ public class ProduitController {
         
         BeanUtils.copyProperties(request, produit);
 
-        this.repository.save(produit);
+        this.produitRepo.save(produit);
 
         return produit.getId();
     }

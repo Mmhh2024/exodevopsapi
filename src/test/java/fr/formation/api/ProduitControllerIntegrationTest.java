@@ -2,6 +2,7 @@ package fr.formation.api;
 
 import java.math.BigDecimal;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -43,6 +44,22 @@ public class ProduitControllerIntegrationTest {
 
         // then
         result.andExpect(MockMvcResultMatchers.content().string("4"));
+    }
+
+    @Test
+    void shouldFind3Products() throws Exception{
+        //given testDB
+
+        //when
+        ResultActions result = this.mockMvc.perform(
+            MockMvcRequestBuilders.get("/api/produit"));
+
+        //then
+        result.andExpect(MockMvcResultMatchers.jsonPath("$").isArray())
+        .andExpect(MockMvcResultMatchers.jsonPath("$",Matchers.hasSize(3)))
+        .andExpect(MockMvcResultMatchers.jsonPath("$[0].id").value(1))
+        .andExpect(MockMvcResultMatchers.jsonPath("$[1].nom").value("fraises"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$[2].prix").value(0.8));
     }
 
     private String json(ProduitRequest request) throws JsonProcessingException {
